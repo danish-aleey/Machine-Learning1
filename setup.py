@@ -1,0 +1,22 @@
+from setuptools import find_packages, setup
+from typing import List
+
+def get_requirements(file_path: str) -> List[str]:
+    """
+    This function will return the list of requirements
+    """
+    with open(file_path) as file_obj:
+        requirements = file_obj.readlines()
+        # fix: it should be '\n' not '/n'
+        requirements = [req.strip() for req in requirements if req.strip()]
+    return requirements
+
+setup(
+    name='ml_project',
+    version='0.0.1',  # fix typo: verison -> version
+    author='danish',
+    author_email='danish.data.012@gmail.com',
+    packages=find_packages(where="src"),  # fix: you need to call find_packages
+    package_dir={"": "src"},              # tell setuptools your code is inside src
+    install_requires=get_requirements('requirements.txt'),
+)
